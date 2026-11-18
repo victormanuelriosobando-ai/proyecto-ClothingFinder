@@ -1,0 +1,35 @@
+{% extends 'finder/base.html' %}
+{% block content %}
+<div class="encabezado">
+  <div>
+    <h1>{{ accion }}</h1>
+    <p class="subtitulo">{% if editando %}Modifica los datos y guarda los cambios.{% else %}Completa los datos para crear el registro.{% endif %}</p>
+  </div>
+  <a class="btn btn-outline-secondary" href="{% url 'lista' slug %}">← Volver al listado</a>
+</div>
+
+<section class="tarjeta">
+  <form method="post" enctype="multipart/form-data" novalidate>
+    {% csrf_token %}
+    {{ form.non_field_errors }}
+    <div class="row g-3">
+      {% for field in form %}
+      <div class="{% if field.name == 'descripcion' or field.name == 'comentario' or field.name == 'detalle' %}col-12{% else %}col-md-6{% endif %}">
+        {% if field.field.widget.input_type == 'checkbox' %}
+          <div class="form-check mt-4">{{ field }}<label class="form-check-label" for="{{ field.id_for_label }}">{{ field.label }}</label></div>
+        {% else %}
+          <label class="form-label" for="{{ field.id_for_label }}">{{ field.label }}</label>
+          {{ field }}
+        {% endif %}
+        {% if field.help_text %}<div class="form-text">{{ field.help_text }}</div>{% endif %}
+        {% for error in field.errors %}<div class="text-danger small">{{ error }}</div>{% endfor %}
+      </div>
+      {% endfor %}
+    </div>
+    <div class="mt-4 d-flex gap-2">
+      <button class="btn btn-azul">{% if editando %}Guardar cambios{% else %}Guardar{% endif %}</button>
+      <a class="btn btn-light" href="{% url 'lista' slug %}">Cancelar</a>
+    </div>
+  </form>
+</section>
+{% endblock %}

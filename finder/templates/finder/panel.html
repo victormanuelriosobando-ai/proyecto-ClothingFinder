@@ -1,0 +1,68 @@
+{% extends 'finder/base.html' %}
+{% block content %}
+<div class="encabezado">
+  <div>
+    <h1>¡Bienvenido al panel!</h1>
+    <p class="subtitulo">Resumen general de ClothingFinder.</p>
+  </div>
+  <a class="btn btn-azul" href="{% url 'crear' 'tiendas' %}">＋ Registrar tienda</a>
+</div>
+
+<div class="row g-3 mb-2">
+  <div class="col-6 col-xl-3"><a class="text-decoration-none text-reset" href="{% url 'lista' 'tiendas' %}">
+      <div class="tarjeta mb-0">
+        <div class="text-secondary">Tiendas registradas</div>
+        <div class="metrica-valor">{{ tiendas }}</div>
+      </div>
+    </a></div>
+  <div class="col-6 col-xl-3"><a class="text-decoration-none text-reset" href="{% url 'lista' 'productos' %}">
+      <div class="tarjeta mb-0">
+        <div class="text-secondary">Productos publicados</div>
+        <div class="metrica-valor">{{ productos }}</div>
+      </div>
+    </a></div>
+  <div class="col-6 col-xl-3"><a class="text-decoration-none text-reset" href="{% url 'lista' 'resenas' %}">
+      <div class="tarjeta mb-0">
+        <div class="text-secondary">Reseñas</div>
+        <div class="metrica-valor">{{ resenas }}</div>
+      </div>
+    </a></div>
+  <div class="col-6 col-xl-3"><a class="text-decoration-none text-reset" href="{% url 'lista' 'reportes' %}">
+      <div class="tarjeta mb-0">
+        <div class="text-secondary">Reportes pendientes</div>
+        <div class="metrica-valor">{{ reportes }}</div>
+      </div>
+    </a></div>
+</div>
+
+<section class="tarjeta mt-3">
+  <h2>Tiendas recientes</h2>
+  <div class="table-responsive">
+    <table class="table table-hover">
+      <thead>
+        <tr>
+          <th>Tienda</th>
+          <th>Ciudad</th>
+          <th>Estilo</th>
+          <th>Estado</th>
+        </tr>
+      </thead>
+      <tbody>
+        {% for t in ultimas %}
+        <tr>
+          <td><a href="{% url 'detalle' 'tiendas' t.pk %}">{{ t.nombre }}</a></td>
+          <td>{{ t.ciudad }}</td>
+          <td>{{ t.estilo|default:'—' }}</td>
+          <td>{% if t.activa %}<span class="badge-estado estado-ok">Activa</span>{% else %}<span
+              class="badge-estado estado-pendiente">Inactiva</span>{% endif %}</td>
+        </tr>
+        {% empty %}
+        <tr>
+          <td colspan="4">Todavía no hay tiendas registradas.</td>
+        </tr>
+        {% endfor %}
+      </tbody>
+    </table>
+  </div>
+</section>
+{% endblock %}

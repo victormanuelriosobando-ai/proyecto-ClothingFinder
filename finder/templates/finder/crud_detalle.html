@@ -1,0 +1,25 @@
+{% extends 'finder/base.html' %}
+{% block content %}
+<div class="encabezado">
+  <div>
+    <h1>{{ cfg.singular|capfirst }} #{{ obj.pk }}</h1>
+    <p class="subtitulo">{{ obj }}</p>
+  </div>
+  <div class="d-flex gap-2">
+    <a class="btn btn-outline-secondary" href="{% url 'lista' slug %}">← Volver</a>
+    <a class="btn btn-warning" href="{% url 'editar' slug obj.pk %}">Editar</a>
+    <a class="btn btn-danger" href="{% url 'eliminar' slug obj.pk %}">Eliminar</a>
+  </div>
+</div>
+
+<section class="tarjeta">
+  <dl class="row detalle-lista mb-0">
+    {% for c in campos %}
+      <dt class="col-sm-3">{{ c.etiqueta }}</dt>
+      <dd class="col-sm-9">
+        {% if c.imagen %}<img src="{{ c.imagen }}" alt="{{ obj }}" class="img-fluid rounded" style="max-height:220px">{% else %}{{ c.valor }}{% endif %}
+      </dd>
+    {% endfor %}
+  </dl>
+</section>
+{% endblock %}

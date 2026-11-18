@@ -1,0 +1,822 @@
+<!doctype html>
+<html lang="es">
+
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="ClothingFinder conecta tu estilo con tiendas de ropa cercanas.">
+  <title>ClothingFinder | Encuentra tu estilo</title>
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+  <style>
+    @import url('https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Playfair+Display:wght@700;800&display=swap');
+
+    :root {
+      --azul: #087ff5;
+      --negro: #050505;
+      --texto: #111827;
+      --gris: #737373;
+      --fondo: #f4f4f4;
+      --amarillo: #ffd08b
+    }
+
+    * {
+      box-sizing: border-box
+    }
+
+    body {
+      margin: 0;
+      color: var(--texto);
+      font-family: 'DM Sans', Arial, sans-serif
+    }
+
+    a {
+      text-decoration: none
+    }
+
+    .logo {
+      display: inline-flex;
+      align-items: center;
+      gap: 10px;
+      color: #111;
+      font-weight: 700;
+      font-size: 16px
+    }
+
+    .logo-icono {
+      width: 32px;
+      height: 32px;
+      border-radius: 8px;
+      background: var(--azul);
+      color: #fff;
+      display: grid;
+      place-items: center
+    }
+
+    .logo-svg {
+      width: 19px;
+      height: 19px;
+      display: block
+    }
+
+    .barra {
+      height: 58px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 0 26px;
+      background: #fff
+    }
+
+    .btn-azul {
+      background: var(--azul);
+      color: #fff;
+      border: 1px solid var(--azul);
+      border-radius: 6px;
+      font-size: 12px;
+      font-weight: 600;
+      padding: 10px 18px
+    }
+
+    .btn-azul:hover {
+      background: #006be0;
+      color: #fff
+    }
+
+    .hero {
+      background: #fff;
+      padding: 0 26px 36px
+    }
+
+    .hero-contenido {
+      max-width: 1120px;
+      margin: auto;
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 48px;
+      align-items: center;
+      min-height: 420px
+    }
+
+    .hero-texto {
+      padding: 32px 12px 10px
+    }
+
+    .insignia {
+      display: inline-block;
+      background: #ffe0b2;
+      color: #222;
+      border-radius: 50px;
+      padding: 7px 12px;
+      font-size: 11px;
+      font-weight: 700;
+      margin-bottom: 20px
+    }
+
+    h1,
+    h2,
+    h3,
+    .serif {
+      font-family: 'Playfair Display', Georgia, serif
+    }
+
+    h1 {
+      font-size: clamp(36px, 4vw, 52px);
+      line-height: 1.06;
+      letter-spacing: -1.5px;
+      font-weight: 800;
+      margin: 0
+    }
+
+    h1 span {
+      color: var(--azul)
+    }
+
+    .descripcion {
+      max-width: 360px;
+      color: #777;
+      font-size: 14px;
+      line-height: 1.8;
+      margin: 18px 0 24px
+    }
+
+    .buscador {
+      display: flex;
+      max-width: 340px;
+      border: 1.5px solid #111;
+      border-radius: 8px;
+      overflow: hidden;
+      height: 44px
+    }
+
+    .buscador input {
+      min-width: 0;
+      flex: 1;
+      border: 0;
+      padding: 0 12px;
+      outline: none
+    }
+
+    .buscador button {
+      border: 0;
+      border-radius: 0;
+      padding: 0 17px
+    }
+
+    .estadisticas {
+      display: flex;
+      gap: 28px;
+      margin-top: 25px
+    }
+
+    .estadistica strong {
+      display: block;
+      color: var(--azul);
+      font-family: 'Playfair Display', Georgia, serif;
+      font-size: 23px;
+      line-height: 1.2
+    }
+
+    .estadistica span {
+      font-size: 10px;
+      color: #777
+    }
+
+    .collage {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      grid-template-rows: 210px 210px;
+      gap: 4px;
+      height: 424px
+    }
+
+    .collage img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      display: block
+    }
+
+    .collage .grande {
+      grid-row: span 1
+    }
+
+    .pasos {
+      background: #050505;
+      color: #fff;
+      padding: 62px 26px 58px
+    }
+
+    .seccion-centro {
+      text-align: center
+    }
+
+    .sobretitulo {
+      color: var(--azul);
+      font-size: 10px;
+      font-weight: 700;
+      letter-spacing: 2px;
+      text-transform: uppercase;
+      margin-bottom: 8px
+    }
+
+    .pasos h2,
+    .estilos h2,
+    .testimonios h2,
+    .cta h2 {
+      font-size: 30px;
+      font-weight: 800;
+      margin-bottom: 30px
+    }
+
+    .tarjetas-pasos {
+      max-width: 1120px;
+      margin: auto;
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 0
+    }
+
+    .paso {
+      position: relative;
+      background: #111;
+      padding: 28px 30px;
+      min-height: 158px
+    }
+
+    .paso:nth-child(2) {
+      background: var(--azul)
+    }
+
+    .paso .numero {
+      position: absolute;
+      right: 20px;
+      top: 0;
+      font-family: 'Playfair Display', Georgia, serif;
+      font-size: 54px;
+      font-weight: 800;
+      color: #202020
+    }
+
+    .paso:nth-child(2) .numero {
+      color: #3395ff
+    }
+
+    .paso .icono {
+      color: var(--amarillo);
+      font-size: 20px;
+      position: relative
+    }
+
+    .paso:nth-child(2) .icono {
+      color: #fff
+    }
+
+    .paso h3 {
+      font-size: 16px;
+      font-weight: 700;
+      margin: 14px 0 8px;
+      position: relative
+    }
+
+    .paso p {
+      font-size: 11px;
+      line-height: 1.7;
+      color: #999;
+      max-width: 230px;
+      margin: 0;
+      position: relative
+    }
+
+    .paso:nth-child(2) p {
+      color: #fff
+    }
+
+    .estilos {
+      padding: 58px 26px 60px;
+      background: #fff
+    }
+
+    .seccion-ancho {
+      max-width: 1120px;
+      margin: auto
+    }
+
+    .titulo-fila {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 24px
+    }
+
+    .titulo-fila .sobretitulo {
+      color: #777
+    }
+
+    .titulo-fila h2 {
+      font-size: 27px;
+      margin: 0
+    }
+
+    .btn-contorno {
+      background: #fff;
+      border: 1px solid #111;
+      color: #111;
+      border-radius: 5px;
+      padding: 9px 15px;
+      font-size: 11px;
+      font-weight: 700
+    }
+
+    .estilos-grid {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 14px
+    }
+
+    .estilo-card {
+      border: 1px solid #e8e8e8;
+      border-radius: 9px;
+      overflow: hidden;
+      background: #fff;
+      color: #111
+    }
+
+    .estilo-imagen {
+      height: 130px;
+      position: relative
+    }
+
+    .estilo-imagen img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      display: block
+    }
+
+    .etiqueta {
+      position: absolute;
+      top: 10px;
+      left: 10px;
+      background: #ffd08b;
+      color: #111;
+      border-radius: 20px;
+      padding: 5px 9px;
+      font-size: 9px;
+      font-weight: 700
+    }
+
+    .estilo-info {
+      padding: 12px
+    }
+
+    .estilo-info strong {
+      font-size: 11px;
+      display: block;
+      margin-bottom: 4px
+    }
+
+    .estilo-info span {
+      font-size: 10px;
+      color: #888
+    }
+
+    .testimonios {
+      background: #f4f4f4;
+      padding: 58px 26px 60px
+    }
+
+    .testimonios h2 {
+      text-align: center;
+      margin-bottom: 30px
+    }
+
+    .testimonios-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 16px
+    }
+
+    .opinion {
+      background: #fff;
+      border-radius: 12px;
+      padding: 22px;
+      min-height: 180px
+    }
+
+    .estrellas {
+      color: #ffd08b;
+      letter-spacing: 1px;
+      margin-bottom: 10px
+    }
+
+    .opinion p {
+      font-size: 11px;
+      line-height: 1.8;
+      color: #333
+    }
+
+    .persona {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      margin-top: 14px
+    }
+
+    .persona img {
+      width: 30px;
+      height: 30px;
+      border-radius: 50%;
+      object-fit: cover
+    }
+
+    .persona strong {
+      font-size: 10px;
+      display: block
+    }
+
+    .persona span {
+      font-size: 9px;
+      color: #888
+    }
+
+    .cta {
+      background: var(--azul);
+      color: #fff;
+      text-align: center;
+      padding: 54px 20px 60px
+    }
+
+    .cta .escudo {
+      font-size: 27px;
+      color: #ffd08b;
+      margin-bottom: 10px
+    }
+
+    .cta h2 {
+      margin-bottom: 12px
+    }
+
+    .cta p {
+      font-size: 12px;
+      line-height: 1.7;
+      max-width: 480px;
+      margin: 0 auto 24px
+    }
+
+    .btn-negro {
+      background: #050505;
+      color: #fff;
+      border: 1px solid #050505;
+      border-radius: 6px;
+      padding: 11px 18px;
+      font-size: 11px;
+      font-weight: 700
+    }
+
+    .btn-claro {
+      background: transparent;
+      color: #fff;
+      border: 1px solid #fff;
+      border-radius: 6px;
+      padding: 11px 18px;
+      font-size: 11px;
+      font-weight: 700;
+      margin-left: 8px
+    }
+
+    footer {
+      background: #050505;
+      color: #fff;
+      padding: 28px 26px 18px
+    }
+
+    .pie-interior {
+      max-width: 1120px;
+      margin: auto
+    }
+
+    .pie-fila {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 20px;
+      padding-bottom: 22px;
+      border-bottom: 1px solid #222
+    }
+
+    .pie-marca {
+      font-family: 'Playfair Display', Georgia, serif;
+      font-weight: 800;
+      font-size: 18px
+    }
+
+    .pie-sub {
+      font-size: 10px;
+      color: #777;
+      margin-top: 6px
+    }
+
+    .pie-links {
+      display: flex;
+      gap: 22px;
+      font-size: 10px;
+      color: #888
+    }
+
+    .copyright {
+      text-align: center;
+      font-size: 9px;
+      color: #777;
+      padding-top: 16px
+    }
+
+    @media(max-width:760px) {
+      .barra {
+        padding: 0 16px
+      }
+
+      .hero {
+        padding: 0 16px 28px
+      }
+
+      .hero-contenido {
+        grid-template-columns: 1fr;
+        gap: 24px
+      }
+
+      .hero-texto {
+        padding: 36px 4px 0
+      }
+
+      .collage {
+        height: 340px;
+        grid-template-rows: 168px 168px
+      }
+
+      .pasos,
+      .estilos,
+      .testimonios {
+        padding: 44px 16px
+      }
+
+      .tarjetas-pasos {
+        grid-template-columns: 1fr
+      }
+
+      .paso {
+        min-height: 140px
+      }
+
+      .estilos-grid {
+        grid-template-columns: repeat(2, 1fr)
+      }
+
+      .estilo-imagen {
+        height: 120px
+      }
+
+      .testimonios-grid {
+        grid-template-columns: 1fr
+      }
+
+      .titulo-fila h2 {
+        font-size: 23px
+      }
+
+      .pasos h2,
+      .testimonios h2,
+      .cta h2 {
+        font-size: 26px
+      }
+
+      .pie-fila {
+        align-items: flex-start;
+        flex-direction: column
+      }
+
+      .pie-links {
+        flex-wrap: wrap;
+        gap: 14px
+      }
+
+      .estadisticas {
+        gap: 22px
+      }
+    }
+
+    @media(max-width:400px) {
+      h1 {
+        font-size: 34px
+      }
+
+      .estilos-grid {
+        gap: 8px
+      }
+
+      .estilo-info {
+        padding: 9px
+      }
+
+      .estadistica strong {
+        font-size: 20px
+      }
+    }
+  </style>
+</head>
+
+<body>
+  <header class="barra">
+    <a class="logo" href="{% url 'landing' %}">
+      <span class="logo-icono"><svg class="logo-svg" viewBox="0 0 24 24" aria-hidden="true">
+          <path d="M6.5 8.5h11l.8 11h-12.6l.8-11Z" fill="none" stroke="currentColor" stroke-width="1.7"
+            stroke-linejoin="round" />
+          <path d="M9 8.5V6.8a3 3 0 0 1 6 0v1.7M9.5 12.2l2.5 2.2 2.5-2.2" fill="none" stroke="currentColor"
+            stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" />
+        </svg></span>
+      <span>ClothingFinder</span>
+    </a>
+    <div class="d-flex gap-2">
+      {% if user.is_authenticated %}
+      {% if user.is_staff %}<a class="btn btn-azul" href="{% url 'panel' %}">Ir al panel</a>{% endif %}
+      <form method="post" action="{% url 'logout' %}" class="m-0">{% csrf_token %}<button class="btn btn-light">Cerrar
+          sesión</button></form>
+      {% else %}
+      <a class="btn btn-light" href="{% url 'login' %}">Iniciar sesión</a>
+      <a class="btn btn-azul" href="{% url 'registro' %}">Registrarse</a>
+      {% endif %}
+    </div>
+  </header>
+
+  <main>
+    <section class="hero">
+      <div class="hero-contenido">
+        <div class="hero-texto">
+          <span class="insignia">⚡ &nbsp; +15.000 tiendas registradas</span>
+          <h1>Encuentra tu <span>estilo</span>,<br> cerca de ti.</h1>
+          <p class="descripcion">Busca tiendas de ropa según el estilo que amas. Desde streetwear hasta moda clásica —
+            encuentra los mejores locales en tu ciudad al instante.</p>
+          <form class="buscador" action="{% url 'landing' %}" method="get">
+            <input type="text" aria-label="Estilo de ropa" name="estilo" value="{{ estilo }}"
+              placeholder="¿Qué estilo buscas?">
+            <button class="btn btn-azul" type="submit">Buscar →</button>
+          </form>
+          <div class="estadisticas">
+            <div class="estadistica"><strong>15K+</strong><span>Tiendas</span></div>
+            <div class="estadistica"><strong>320+</strong><span>Estilos</span></div>
+            <div class="estadistica"><strong>98%</strong><span>Satisfacción</span></div>
+          </div>
+        </div>
+        <div class="collage" aria-label="Fotografías de estilos y tiendas de ropa">
+          <img src="https://images.unsplash.com/photo-1529139574466-a303027c1d8b?auto=format&fit=crop&w=800&q=85"
+            alt="Estilo urbano">
+          <img src="https://images.unsplash.com/photo-1490481651871-ab68de25d43d?auto=format&fit=crop&w=800&q=85"
+            alt="Prendas de moda">
+          <img src="https://images.unsplash.com/photo-1483985988355-763728e1935b?auto=format&fit=crop&w=800&q=85"
+            alt="Personas explorando moda">
+          <img src="https://images.unsplash.com/photo-1441986300917-64674bd600d8?auto=format&fit=crop&w=800&q=85"
+            alt="Interior de tienda de ropa">
+        </div>
+      </div>
+    </section>
+
+    <section class="pasos">
+      <div class="seccion-centro">
+        <div class="sobretitulo">Cómo funciona</div>
+        <h2>En 3 simples pasos</h2>
+      </div>
+      <div class="tarjetas-pasos">
+        <article class="paso"><span class="numero">01</span><span class="icono">♡</span>
+          <h3>Elige tu estilo</h3>
+          <p>Escribe el estilo de moda que buscas o selecciona de nuestras categorías curadas.</p>
+        </article>
+        <article class="paso"><span class="numero">02</span><span class="icono">⌖</span>
+          <h3>Filtra tu ubicación</h3>
+          <p>Dinos dónde estás y te mostramos las tiendas más cercanas con ese estilo exacto.</p>
+        </article>
+        <article class="paso"><span class="numero">03</span><span class="icono">☆</span>
+          <h3>Visita y compra</h3>
+          <p>Revisa reseñas, horarios y fotos de cada tienda. ¡Llega directo a donde quieres ir!</p>
+        </article>
+      </div>
+    </section>
+
+    <section class="estilos">
+      <div class="seccion-ancho">
+        <div class="titulo-fila">
+          <div>
+            <div class="sobretitulo">Explorar</div>
+            <h2>Estilos populares</h2>
+          </div>
+          <a class="btn-contorno" href="{% url 'landing' %}#resultados">Ver todos →</a>
+        </div>
+        <div class="estilos-grid">
+          <a class="estilo-card" href="{% url 'landing' %}?estilo=urbano#resultados">
+            <div class="estilo-imagen"><img
+                src="https://images.unsplash.com/photo-1529139574466-a303027c1d8b?auto=format&fit=crop&w=500&q=80"
+                alt="Streetwear urbano"><span class="etiqueta">Tendencia</span></div>
+            <div class="estilo-info"><strong>Streetwear Urbano</strong><span>142 tiendas disponibles</span></div>
+          </a>
+          <a class="estilo-card" href="{% url 'landing' %}?estilo=minimalista#resultados">
+            <div class="estilo-imagen"><img
+                src="https://images.unsplash.com/photo-1490481651871-ab68de25d43d?auto=format&fit=crop&w=500&q=80"
+                alt="Moda minimalista"><span class="etiqueta">Popular</span></div>
+            <div class="estilo-info"><strong>Moda Minimalista</strong><span>98 tiendas disponibles</span></div>
+          </a>
+          <a class="estilo-card" href="{% url 'landing' %}?estilo=bohemio#resultados">
+            <div class="estilo-imagen"><img
+                src="https://images.unsplash.com/photo-1441986300917-64674bd600d8?auto=format&fit=crop&w=500&q=80"
+                alt="Tienda de moda chic"><span class="etiqueta">Nuevo</span></div>
+            <div class="estilo-info"><strong>Bohemio Chic</strong><span>76 tiendas disponibles</span></div>
+          </a>
+          <a class="estilo-card" href="{% url 'landing' %}?estilo=elegante#resultados">
+            <div class="estilo-imagen"><img
+                src="https://images.unsplash.com/photo-1483985988355-763728e1935b?auto=format&fit=crop&w=500&q=80"
+                alt="Elegancia clásica"><span class="etiqueta">Top rated</span></div>
+            <div class="estilo-info"><strong>Elegancia Clásica</strong><span>115 tiendas disponibles</span></div>
+          </a>
+        </div>
+      </div>
+    </section>
+
+    <section class="testimonios">
+      <div class="seccion-ancho">
+        <div class="sobretitulo text-center">Testimonios</div>
+        <h2>Lo que dicen nuestros usuarios</h2>
+        <div class="testimonios-grid">
+          <article class="opinion">
+            <div class="estrellas">★★★★★</div>
+            <p>“ClothingFinder cambió por completo cómo encuentro tiendas. Ahora puedo buscar exactamente el estilo que
+              quiero sin recorrer toda la ciudad.”</p>
+            <div class="persona"><img
+                src="https://images.unsplash.com/photo-1534528741775-53994a69daeb?auto=format&fit=crop&w=100&q=80"
+                alt="">
+              <div><strong>Valentina Reyes</strong><span>Fashion blogger</span></div>
+            </div>
+          </article>
+          <article class="opinion">
+            <div class="estrellas">★★★★★</div>
+            <p>“Una herramienta indispensable. La precisión con la que filtra por estilos es increíble. Mis clientes la
+              usan constantemente.”</p>
+            <div class="persona"><img
+                src="https://images.unsplash.com/photo-1500648282268-7a6c7f1a2a1a?auto=format&fit=crop&w=100&q=80"
+                alt="">
+              <div><strong>Carlos Mendoza</strong><span>Diseñador de moda</span></div>
+            </div>
+          </article>
+          <article class="opinion">
+            <div class="estrellas">★★★★★</div>
+            <p>“Encontré mi tienda favorita de streetwear en 2 minutos. Antes tardaba semanas buscando en redes
+              sociales.”</p>
+            <div class="persona"><img
+                src="https://images.unsplash.com/photo-1531123897727-8f129e1688ce?auto=format&fit=crop&w=100&q=80"
+                alt="">
+              <div><strong>Sofía Martínez</strong><span>Compradora frecuente</span></div>
+            </div>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <section class="cta">
+      <div class="escudo">♧</div>
+      <h2>Empieza a descubrir tiendas hoy</h2>
+      <p>Crea tu cuenta gratis y accede a miles de tiendas con tus estilos favoritos en tu ciudad.</p>
+      <a class="btn-negro" href="{% url 'registro' %}">Crear cuenta gratis →</a>
+      <a class="btn-claro" href="{% url 'login' %}">Ya tengo cuenta</a>
+    </section>
+  </main>
+
+  <footer>
+    <div class="pie-interior">
+      <div class="pie-fila">
+        <div>
+          <div class="pie-marca">ClothingFinder</div>
+          <div class="pie-sub">Conectando estilos con tiendas.</div>
+        </div>
+        <nav class="pie-links" aria-label="Enlaces del pie de página"><a href="#acerca" class="text-secondary">Acerca
+            de</a><a href="#contacto" class="text-secondary">Contacto</a><a href="#privacidad"
+            class="text-secondary">Privacidad</a><a href="#terminos" class="text-secondary">Términos</a></nav>
+      </div>
+      <div class="copyright">© 2026 ClothingFinder. Todos los derechos reservados.</div>
+    </div>
+  </footer>
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+  <section class="container py-5" id="resultados">
+    <h2>Tiendas que pueden gustarte</h2>
+    <div class="row g-3">{% for tienda in tiendas %}<div class="col-md-4">
+        <article class="card h-100">
+          <div class="card-body">
+            <h5>{{ tienda.nombre }}</h5>
+            <p>{{ tienda.descripcion|default:tienda.estilo }}</p>
+            <p class="text-secondary">{{ tienda.ciudad }} · {{ tienda.direccion }}</p><a class="btn btn-azul"
+              href="{% url 'detalle_tienda' tienda.pk %}">Ver tienda</a>
+          </div>
+        </article>
+      </div>{% empty %}<p>No hay tiendas que coincidan con la búsqueda todavía. Prueba otro estilo o vuelve más tarde.
+      </p>{% endfor %}</div>
+    <div class="mt-4"><a href="{% url 'crear_reporte' %}">Reportar una tienda o producto</a> · <a
+        href="{% url 'panel' %}">Panel de administración</a></div>
+  </section>
+</body>
+
+</html>

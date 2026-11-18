@@ -1,0 +1,19 @@
+{% extends 'finder/base.html' %}
+{% block content %}
+<div class="encabezado">
+  <div>
+    <h1>Eliminar {{ cfg.singular }}</h1>
+    <p class="subtitulo">Esta acción no se puede deshacer.</p>
+  </div>
+</div>
+
+<section class="tarjeta">
+  <p class="mb-2">¿Seguro que deseas eliminar <strong>{{ obj }}</strong>?</p>
+  {% if cfg.aviso_eliminar %}<div class="alert alert-warning">{{ cfg.aviso_eliminar }}</div>{% endif %}
+  <form method="post" class="d-flex gap-2 mt-3">
+    {% csrf_token %}
+    <button class="btn btn-danger">Sí, eliminar</button>
+    <a class="btn btn-light" href="{% url 'lista' slug %}">Cancelar</a>
+  </form>
+</section>
+{% endblock %}
