@@ -6,7 +6,8 @@
   <h1>{{ tienda.nombre }}</h1>
   <p>{{ tienda.descripcion }}</p>
   <p><strong>Dirección:</strong> {{ tienda.direccion }}, {{ tienda.ciudad }}</p>
-  <p><strong>Estilo:</strong> {{ tienda.estilo|default:'—' }} · <strong>Horario:</strong> {{ tienda.horario|default:'Consultar' }}</p>
+  <p><strong>Estilo:</strong> {{ tienda.estilo|default:'—' }} · <strong>Horario:</strong> {{
+    tienda.horario|default:'Consultar' }}</p>
   <p><strong>Contacto:</strong> {{ tienda.correo }} {{ tienda.telefono }}</p>
 
   <h4 class="mt-4">Catálogo</h4>
@@ -25,11 +26,14 @@
     {% endfor %}
   </div>
 
-  <h4 class="mt-4">Reseñas{% if promedio %} <small class="text-secondary">· promedio {{ promedio|floatformat:1 }}/5</small>{% endif %}</h4>
+  <h4 class="mt-4">Reseñas{% if promedio %} <small class="text-secondary">· promedio {{ promedio|floatformat:1
+      }}/5</small>{% endif %}</h4>
   {% for r in resenas %}
-    <div class="border-bottom py-2"><strong>{{ r.nombre_publico }} · {{ r.calificacion }}/5</strong><p class="mb-0">{{ r.comentario }}</p></div>
+  <div class="border-bottom py-2"><strong>{{ r.nombre_publico }} · {{ r.calificacion }}/5</strong>
+    <p class="mb-0">{{ r.comentario }}</p>
+  </div>
   {% empty %}
-    <p>Esta tienda aún no tiene reseñas.</p>
+  <p>Esta tienda aún no tiene reseñas.</p>
   {% endfor %}
 </section>
 
@@ -38,11 +42,11 @@
   <form method="post" novalidate>
     {% csrf_token %}
     {% for field in form %}
-      <div class="mb-3">
-        <label class="form-label" for="{{ field.id_for_label }}">{{ field.label }}</label>
-        {{ field }}
-        {% for e in field.errors %}<div class="text-danger small">{{ e }}</div>{% endfor %}
-      </div>
+    <div class="mb-3">
+      <label class="form-label" for="{{ field.id_for_label }}">{{ field.label }}</label>
+      {{ field }}
+      {% for e in field.errors %}<div class="text-danger small">{{ e }}</div>{% endfor %}
+    </div>
     {% endfor %}
     <button class="btn btn-azul">Enviar reseña</button>
   </form>

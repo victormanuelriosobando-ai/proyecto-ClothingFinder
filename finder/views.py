@@ -14,10 +14,7 @@ from .forms import (ProductForm, PublicReviewForm, ReportAdminForm, ReportForm,
                     ReviewForm, SignUpForm, StoreForm, UsuarioForm)
 from .models import Product, Report, Review, Store
 
-# ---------------------------------------------------------------------------
-# Configuración de los CRUD. Cada módulo se describe una sola vez aquí y las
-# mismas vistas (lista, crear, detalle, editar y eliminar) sirven para todos.
-# ---------------------------------------------------------------------------
+
 CRUD = {
     'usuarios': {
         'model': User, 'form': UsuarioForm,

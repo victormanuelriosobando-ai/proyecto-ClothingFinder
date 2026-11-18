@@ -15,10 +15,11 @@
 <section class="tarjeta">
   <dl class="row detalle-lista mb-0">
     {% for c in campos %}
-      <dt class="col-sm-3">{{ c.etiqueta }}</dt>
-      <dd class="col-sm-9">
-        {% if c.imagen %}<img src="{{ c.imagen }}" alt="{{ obj }}" class="img-fluid rounded" style="max-height:220px">{% else %}{{ c.valor }}{% endif %}
-      </dd>
+    <dt class="col-sm-3">{{ c.etiqueta }}</dt>
+    <dd class="col-sm-9">
+      {% if c.imagen %}<img src="{{ c.imagen }}" alt="{{ obj }}" class="img-fluid rounded" style="max-height:220px">{%
+      else %}{{ c.valor }}{% endif %}
+    </dd>
     {% endfor %}
   </dl>
 </section>
